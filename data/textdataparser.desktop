@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=Text Data Parser
+Comment=View text data files with definitions
+Comment[en]=View text data files with definitions
+Comment[it]=Visualizza file di testo con definizioni
+Terminal=false
+Categories=Office;GTK;
+Icon=textdataparser
+TryExec=textdataparser
+Exec=textdataparser
