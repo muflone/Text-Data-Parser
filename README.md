@@ -40,6 +40,6 @@ Usage
 If the application is not installed please use:
 
     cd /path/to/folder
-    python2 text-data-parser.py
+    python2 textdataparser.py
 
-If the application was installed simply use the text-data-parser command.
+If the application was installed simply use the textdataparser command.

@@ -87,7 +87,7 @@ setup(
   url=APP_URL,
   description=APP_DESCRIPTION,
   license='GPL v2',
-  scripts=['text-data-parser.py'],
+  scripts=['textdataparser.py'],
   packages=['text_data_parser', 'text_data_parser/parsers'],
   data_files=[
     ('share/textdataparser/data', ['data/textdataparser.png']),

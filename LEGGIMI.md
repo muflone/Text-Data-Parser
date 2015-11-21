@@ -42,7 +42,7 @@ Utilizzo
 Se l'applicazione non è stata installata utilizzare:
 
     cd /path/to/folder
-    python2 text-data-parser.py
+    python2 textdataparser.py
 
 Se l'applicazione è stata installata utilizzare semplicemente il comando
-text-data-parser.
+textdataparser.
