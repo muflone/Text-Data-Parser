@@ -3,7 +3,7 @@ Text Data Parser
 **Descrizione:** Un'interfaccia grafica per visualizzare file di testo con
 definizioni.
 
-**Copyright:** 2016 Fabio Castelli (Muflone) <muflone(at)vbsimple.net>
+**Copyright:** 2015 Fabio Castelli (Muflone) <muflone(at)vbsimple.net>
 
 **Licenza:** GPL-2+
 
