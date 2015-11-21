@@ -18,6 +18,4 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 
-from .defined_fields import DefinedFields
-from .ui_main import UIMain
 from .app import Application

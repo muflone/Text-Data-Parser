@@ -18,7 +18,7 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 
-from . import DefinedFields
+from .defined_fields import DefinedFields
 from .constants import FILE_UI_MAIN
 from .model_data import ModelData
 from .gtkbuilder_loader import GtkBuilderLoader
