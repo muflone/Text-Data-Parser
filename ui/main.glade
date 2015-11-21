@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.19.0 -->
 <interface>
-  <requires lib="gtk+" version="3.10"/>
+  <requires lib="gtk+" version="3.0"/>
   <object class="GtkAccelGroup" id="accelerators"/>
   <object class="GtkActionGroup" id="actions_application">
     <property name="accel_group">accelerators</property>
@@ -93,6 +93,7 @@
     <property name="width_request">400</property>
     <property name="height_request">300</property>
     <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Text Data Parser</property>
     <property name="default_width">800</property>
     <property name="default_height">300</property>
     <accel-groups>
