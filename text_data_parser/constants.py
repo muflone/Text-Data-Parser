@@ -29,7 +29,7 @@ APP_ID = 'textdataparser.muflone.com'
 APP_URL = 'http://www.muflone.com/textdataparser/'
 APP_AUTHOR = 'Fabio Castelli'
 APP_AUTHOR_EMAIL = 'muflone@vbsimple.net'
-APP_COPYRIGHT = 'Copyright 2016 %s' % APP_AUTHOR
+APP_COPYRIGHT = 'Copyright 2015 %s' % APP_AUTHOR
 # Other constants
 DOMAIN_NAME = 'textdataparser'
 
