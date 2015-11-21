@@ -20,19 +20,20 @@
 
 from .abstract import DataParserAbstract
 
-class DataParserFixed(DataParserAbstract):
-  def __init__(self):
-    super(self.__class__, self).__init__()
 
-  def load_from_file(self, fields, file_data):
-    super(self.__class__, self).load_from_file(fields, file_data)
-    with open(file_data, 'r') as f:
-      for s_line in f:
-        # Strip invalid characters
-        s_line = s_line.replace('\r', '')
-        s_line = s_line.replace('\n', '')
-        values = {}
-        for field in fields:
-          values[field.name] = s_line[field.start - 1:field.end]
-        self.values.append(values)
-      f.close()
+class DataParserFixed(DataParserAbstract):
+    def __init__(self):
+        super(self.__class__, self).__init__()
+
+    def load_from_file(self, fields, file_data):
+        super(self.__class__, self).load_from_file(fields, file_data)
+        with open(file_data, 'r') as f:
+            for s_line in f:
+                # Strip invalid characters
+                s_line = s_line.replace('\r', '')
+                s_line = s_line.replace('\n', '')
+                values = {}
+                for field in fields:
+                    values[field.name] = s_line[field.start - 1:field.end]
+                self.values.append(values)
+        f.close()

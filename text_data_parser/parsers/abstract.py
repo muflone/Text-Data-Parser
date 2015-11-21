@@ -18,21 +18,22 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 
+
 class DataParserAbstract(object):
-  def __init__(self):
-    self.data_file = None
-    self.values = []
+    def __init__(self):
+        self.data_file = None
+        self.values = []
 
-  def load_from_file(self, fields, file_source):
-    self.data_file = file_source
+    def load_from_file(self, fields, file_source):
+        self.data_file = file_source
 
-  def __iter__(self):
-    """Iterate over the values"""
-    for value in self.values:
-      yield value
+    def __iter__(self):
+        """Iterate over the values"""
+        for value in self.values:
+            yield value
 
-  def __getitem__(self, index):
-    return self.values[index]
+    def __getitem__(self, index):
+        return self.values[index]
 
-  def __len__(self):
-    return len(self.values)
+    def __len__(self):
+        return len(self.values)

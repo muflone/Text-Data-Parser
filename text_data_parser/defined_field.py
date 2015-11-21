@@ -18,6 +18,7 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 
+
 class DefinedField(object):
     def __init__(self, name, ftype, start, end, length, decimals, description):
         self.name = name
