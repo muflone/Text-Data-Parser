@@ -22,6 +22,7 @@ from .defined_fields import DefinedFields
 from .constants import FILE_UI_MAIN
 from .model_data import ModelData
 from .gtkbuilder_loader import GtkBuilderLoader
+from .ui_about import UIAbout
 from gi.repository import Gtk
 
 
@@ -33,6 +34,7 @@ class UIMain(object):
         self.fields = None
         self.current_row = 0
         self.loadUI()
+        self.about = UIAbout(self.ui.win_main, settings, False)
         # Map each iter to a field name
         self.map_iters = {}
         # Load the definition file if provided
@@ -83,6 +85,7 @@ class UIMain(object):
 
     def on_winMain_delete_event(self, widget, event):
         """Close the application"""
+        self.about.destroy()
         self.ui.win_main.destroy()
         self.application.quit()
 
@@ -109,7 +112,7 @@ class UIMain(object):
 
     def on_action_application_about_activate(self, action):
         """Show the about dialog"""
-        pass
+        self.about.show()
 
     def on_action_application_quit_activate(self, action):
         """Close the window"""
