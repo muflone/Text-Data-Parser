@@ -24,8 +24,8 @@ from text_data_parser.parsers import DataParserFixed
 
 if __name__ == '__main__':
     parser = DataParserFixed()
-    arg_definitions_file = None  # '../samples/ACEPDF.FIELDS'
-    arg_data_file = None  # '../samples/ACEPDF.P320094823'
+    arg_definitions_file = None
+    arg_data_file = None
     # Start the application
     app = Application(
         settings=None,
