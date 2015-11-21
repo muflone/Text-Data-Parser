@@ -6,9 +6,9 @@ Text Data Parser
 
 **License:** GPL-2+
 
-**Codice sorgente:** https://github.com/muflone/Text-Data-Parser
+**Codice sorgente:** https://github.com/muflone/textdataparser
 
-**Documentazione:** http://www.muflone.com/text-data-parser/
+**Documentazione:** http://www.muflone.com/textdataparser/
 
 System Requirements
 -------------------
