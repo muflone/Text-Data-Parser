@@ -69,6 +69,18 @@
       <accelerator key="Page_Up"/>
     </child>
   </object>
+  <object class="GtkActionGroup" id="actions_settings">
+    <property name="accel_group">accelerators</property>
+    <child>
+      <object class="GtkToggleAction" id="action_settings_line_numbers">
+        <property name="label" translatable="yes">Show line numbers</property>
+        <property name="short_label" translatable="yes">Show line numbers</property>
+        <property name="is_important">True</property>
+        <property name="active">True</property>
+        <signal name="toggled" handler="on_action_settings_line_numbers_toggled" swapped="no"/>
+      </object>
+    </child>
+  </object>
   <object class="GtkListStore" id="list_data">
     <columns>
       <!-- column-name ID -->
@@ -148,6 +160,29 @@
                         <property name="related_action">action_application_quit</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="menuitem_edit">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">_Edit</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="menuitem_show_line_numbers">
+                        <property name="use_action_appearance">True</property>
+                        <property name="related_action">action_settings_line_numbers</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
                       </object>
                     </child>
                   </object>

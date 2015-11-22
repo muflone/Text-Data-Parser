@@ -177,3 +177,8 @@ class UIMain(object):
         self.ui.label_position.set_text(self._template_position % {
             'row': iter.get_line() + 1,
             'column': column_number if column_number > 0 else 0 })
+
+    def on_action_settings_line_numbers_toggled(self, action):
+        """Show or hide the line numbers"""
+        self.ui.tag_line_nr.props.invisible = \
+            not self.ui.action_settings_line_numbers.get_active()
