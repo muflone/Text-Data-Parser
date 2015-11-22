@@ -33,7 +33,7 @@ class UIMain(object):
         self.settings = settings
         self.parser = parser
         self.fields = None
-        self.current_row = 0
+        self.current_row = -1
         self.loadUI()
         self.about = UIAbout(self.ui.win_main, settings, False)
         # Map each iter to a field name
@@ -44,6 +44,8 @@ class UIMain(object):
         # Load the data file if provided
         if data:
             self.load_data(data)
+        else:
+            self.show_current_record()
 
     def load_definitions(self, definition_file):
         """Load the fields definitions file"""
@@ -125,12 +127,13 @@ class UIMain(object):
 
     def show_current_record(self):
         """Reload the current record fields"""
-        value = self.parser[self.current_row]
-        for field in self.fields:
-            self.model.set_data(
-                treeiter=self.map_iters[field.name],
-                field=field,
-                raw_value=value[field.name])
+        if len(self.parser):
+            value = self.parser[self.current_row]
+            for field in self.fields:
+                self.model.set_data(
+                    treeiter=self.map_iters[field.name],
+                    field=field,
+                    raw_value=value[field.name])
         self.ui.action_data_previous.set_sensitive(self.current_row > 0)
         self.ui.action_data_next.set_sensitive(
             self.current_row < len(self.parser) - 1)
