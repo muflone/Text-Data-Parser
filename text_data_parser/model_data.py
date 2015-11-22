@@ -54,7 +54,6 @@ class ModelData(object):
         return self.model
 
     def set_data(self, treeiter, field, raw_value):
-        self.model.set_value(treeiter, 0, 0)
         self.model.set_value(treeiter, 1, field.name)
         self.model.set_value(treeiter, 2, field.description)
         self.model.set_value(treeiter, 3, field.start)
