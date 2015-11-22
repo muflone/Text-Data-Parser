@@ -142,17 +142,17 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkMenuItem" id="menuitem_data_open">
+                      <object class="GtkMenuItem" id="menuitem_data_definitions">
                         <property name="use_action_appearance">True</property>
-                        <property name="related_action">action_data_open</property>
+                        <property name="related_action">action_data_definitions</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkMenuItem" id="menuitem_data_definitions">
+                      <object class="GtkMenuItem" id="menuitem_data_open">
                         <property name="use_action_appearance">True</property>
-                        <property name="related_action">action_data_definitions</property>
+                        <property name="related_action">action_data_open</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
@@ -218,11 +218,11 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkToolButton" id="toolbutton_open">
-                <property name="related_action">action_data_open</property>
+              <object class="GtkToolButton" id="toolbutton_definitions">
+                <property name="related_action">action_data_definitions</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Open</property>
+                <property name="label" translatable="yes">Definitions</property>
                 <property name="use_underline">True</property>
               </object>
               <packing>
@@ -231,11 +231,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="toolbutton_definitions">
-                <property name="related_action">action_data_definitions</property>
+              <object class="GtkToolButton" id="toolbutton_open">
+                <property name="related_action">action_data_open</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Definitions</property>
+                <property name="label" translatable="yes">Open</property>
                 <property name="use_underline">True</property>
               </object>
               <packing>
