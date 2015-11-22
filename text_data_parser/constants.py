@@ -33,6 +33,9 @@ APP_AUTHOR_EMAIL = 'muflone@vbsimple.net'
 APP_COPYRIGHT = 'Copyright 2015 %s' % APP_AUTHOR
 # Other constants
 DOMAIN_NAME = 'textdataparser'
+VERBOSE_LEVEL_QUIET = 0
+VERBOSE_LEVEL_NORMAL = 1
+VERBOSE_LEVEL_MAX = 2
 
 # Paths constants
 # If there's a file data/textdataparser.png then the shared data are searched
@@ -60,4 +63,4 @@ FILE_TRANSLATORS = os.path.join(DIR_DOCS, 'translators')
 FILE_LICENSE = os.path.join(DIR_DOCS, 'license')
 FILE_RESOURCES = os.path.join(DIR_DOCS, 'resources')
 # Set the paths for configuration files
-FILE_SETTINGS_NEW = os.path.join(DIR_SETTINGS, 'settings.conf')
+FILE_SETTINGS = os.path.join(DIR_SETTINGS, 'settings.conf')

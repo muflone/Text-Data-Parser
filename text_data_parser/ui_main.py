@@ -21,12 +21,14 @@
 from .defined_fields import DefinedFields
 from .constants import FILE_UI_MAIN
 from .functions import show_dialog_fileopen, _
+from .settings import SECTION_APPLICATION
 from .model_data import ModelData
 from .gtkbuilder_loader import GtkBuilderLoader
 from .ui_about import UIAbout
 from gi.repository import Gtk
 
 LINE_NUMBER_MARGIN = 1
+
 
 class UIMain(object):
     def __init__(self, application, settings, parser, definitions, data):
@@ -38,6 +40,23 @@ class UIMain(object):
         self.total_rows = -1
         self.loadUI()
         self.about = UIAbout(self.ui.win_main, settings, False)
+        # Restore the options from settings
+        self.ui.action_settings_line_numbers.set_active(
+            self.settings.get_boolean(
+                SECTION_APPLICATION,
+                'show line numbers',
+                self.ui.action_settings_line_numbers.get_active()))
+        # Restore the saved size and position
+        if self.settings.get_value('width', 0) and \
+                self.settings.get_value('height', 0):
+            self.ui.win_main.set_default_size(
+                self.settings.get_value('width', -1),
+                self.settings.get_value('height', -1))
+        if self.settings.get_value('left', 0) and \
+                self.settings.get_value('top', 0):
+            self.ui.win_main.move(
+                self.settings.get_value('left', 0),
+                self.settings.get_value('top', 0))
         # Map each iter to a field name
         self.map_iters = {}
         # Load the definition file if provided
@@ -103,7 +122,13 @@ class UIMain(object):
         self.ui.win_main.show_all()
 
     def on_winMain_delete_event(self, widget, event):
-        """Close the application"""
+        """Save the settings and close the application"""
+        self.settings.set_sizes(self.ui.win_main)
+        self.settings.set_boolean(
+            SECTION_APPLICATION,
+            'show line numbers',
+            self.ui.action_settings_line_numbers.get_active())
+        self.settings.save()
         self.about.destroy()
         self.ui.win_main.destroy()
         self.application.quit()
@@ -147,7 +172,8 @@ class UIMain(object):
                     raw_value=value[field.name])
             # Highlight the text line for the selected record
             iter_start = self.ui.textbuffer.get_iter_at_line(self.current_row)
-            iter_end = self.ui.textbuffer.get_iter_at_line(self.current_row + 1)
+            iter_end = self.ui.textbuffer.get_iter_at_line(
+                self.current_row + 1)
             self.ui.textbuffer.remove_tag(self.ui.tag_highlight_line,
                                           self.ui.textbuffer.get_start_iter(),
                                           self.ui.textbuffer.get_end_iter())
@@ -176,7 +202,8 @@ class UIMain(object):
         column_number -= len(str(self.total_rows)) + LINE_NUMBER_MARGIN
         self.ui.label_position.set_text(self._template_position % {
             'row': iter.get_line() + 1,
-            'column': column_number if column_number > 0 else 0 })
+            'column': column_number if column_number > 0 else 0
+        })
 
     def on_action_settings_line_numbers_toggled(self, action):
         """Show or hide the line numbers"""
