@@ -100,6 +100,14 @@
         <property name="font">Normal</property>
       </object>
     </child>
+    <child type="tag">
+      <object class="GtkTextTag" id="tag_line_nr">
+        <property name="foreground">Dark Green</property>
+        <property name="font">Normal</property>
+        <property name="editable">False</property>
+        <property name="left_margin">4</property>
+      </object>
+    </child>
   </object>
   <object class="GtkTextBuffer" id="textbuffer">
     <property name="tag_table">tags</property>

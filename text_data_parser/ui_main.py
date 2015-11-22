@@ -26,6 +26,7 @@ from .gtkbuilder_loader import GtkBuilderLoader
 from .ui_about import UIAbout
 from gi.repository import Gtk
 
+LINE_NUMBER_MARGIN = 1
 
 class UIMain(object):
     def __init__(self, application, settings, parser, definitions, data):
@@ -34,6 +35,7 @@ class UIMain(object):
         self.parser = parser
         self.fields = None
         self.current_row = -1
+        self.total_rows = -1
         self.loadUI()
         self.about = UIAbout(self.ui.win_main, settings, False)
         # Map each iter to a field name
@@ -62,10 +64,19 @@ class UIMain(object):
         self.parser.load_from_file(self.fields, data_file)
         if self.parser.data_file:
             self.ui.textbuffer.set_text('')
+            self.total_rows = 0
             with open(self.parser.data_file, 'r') as text_file:
                 for line in text_file:
+                    self.total_rows += 1
                     self.ui.textbuffer.insert_at_cursor(line, len(line))
                 text_file.close()
+            # Add line numbers on the left side using the tag line_nr
+            for line in xrange(self.total_rows):
+                self.ui.textbuffer.insert_with_tags(
+                    self.ui.textbuffer.get_iter_at_line(line),
+                    ('%%%dd%%s' % len(str(self.total_rows))) % (
+                        line + 1, ' ' * LINE_NUMBER_MARGIN),
+                    self.ui.tag_line_nr)
             self.current_row = 0
             self.show_current_record()
 
@@ -161,6 +172,8 @@ class UIMain(object):
         """Update the cursor position"""
         iter = self.ui.textbuffer.get_iter_at_mark(
             self.ui.textbuffer.get_insert())
+        column_number = iter.get_line_offset() + 1
+        column_number -= len(str(self.total_rows)) + LINE_NUMBER_MARGIN
         self.ui.label_position.set_text(self._template_position % {
             'row': iter.get_line() + 1,
-            'column': iter.get_line_offset() + 1})
+            'column': column_number if column_number > 0 else 0 })
