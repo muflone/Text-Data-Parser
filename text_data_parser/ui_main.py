@@ -20,6 +20,7 @@
 
 from .defined_fields import DefinedFields
 from .constants import FILE_UI_MAIN
+from .functions import show_dialog_fileopen, _
 from .model_data import ModelData
 from .gtkbuilder_loader import GtkBuilderLoader
 from .ui_about import UIAbout
@@ -88,6 +89,15 @@ class UIMain(object):
         self.about.destroy()
         self.ui.win_main.destroy()
         self.application.quit()
+
+    def on_action_data_definitions_activate(self, action):
+        """Select and load a definitions file"""
+        selected_filename = show_dialog_fileopen(
+            parent=self.ui.win_main,
+            title=_("Select a definitions file to load"))
+        if selected_filename:
+            self.load_definitions(selected_filename)
+            self.ui.action_data_open.set_sensitive(True)
 
     def on_action_data_next_activate(self, action):
         """Move to the next record"""
