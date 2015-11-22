@@ -21,14 +21,18 @@
 
 from text_data_parser import Application
 from text_data_parser.parsers import DataParserFixed
+from text_data_parser.settings import Settings
 
 if __name__ == '__main__':
     parser = DataParserFixed()
     arg_definitions_file = None
     arg_data_file = None
+    # Load the settings from the configuration file
+    settings = Settings()
+    settings.load()
     # Start the application
     app = Application(
-        settings=None,
+        settings=settings,
         parser=parser,
         definitions_file=arg_definitions_file,
         data_file=arg_data_file)
