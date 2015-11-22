@@ -110,7 +110,7 @@ class UIMain(object):
             title=_("Select a data file to load"))
         if selected_filename:
             self.load_data(selected_filename)
-        
+
     def on_action_data_next_activate(self, action):
         """Move to the next record"""
         if self.current_row < len(self.parser) - 1:
@@ -132,7 +132,8 @@ class UIMain(object):
                 field=field,
                 raw_value=value[field.name])
         self.ui.action_data_previous.set_sensitive(self.current_row > 0)
-        self.ui.action_data_next.set_sensitive(self.current_row < len(self.parser) - 1)
+        self.ui.action_data_next.set_sensitive(
+            self.current_row < len(self.parser) - 1)
         self.ui.label_recordnr.set_text(self._template_recordnr % {
             'record': self.current_row + 1})
 

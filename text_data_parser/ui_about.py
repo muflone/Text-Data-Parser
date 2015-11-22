@@ -26,6 +26,7 @@ from .gtkbuilder_loader import GtkBuilderLoader
 from .constants import *
 from .functions import *
 
+
 class UIAbout(object):
     def __init__(self, winParent, settings, show=False):
         """Prepare the about dialog and optionally show it immediately"""
@@ -55,14 +56,16 @@ class UIAbout(object):
             contributors.insert(0, _('Contributors:'))
             authors.extend(contributors)
         self.ui.dialogAbout.set_authors(authors)
-        self.ui.dialogAbout.set_license('\n'.join(readlines(FILE_LICENSE, True)))
+        self.ui.dialogAbout.set_license(
+            '\n'.join(readlines(FILE_LICENSE, True)))
         self.ui.dialogAbout.set_translator_credits('\n'.join(translators))
         # Retrieve the external resources links
         # only for GTK+ 3.6.0 and higher
         if not Gtk.check_version(3, 6, 0):
             for line in readlines(FILE_RESOURCES, False):
                 resource_type, resource_url = line.split(':', 1)
-                self.ui.dialogAbout.add_credit_section(resource_type, (resource_url,))
+                self.ui.dialogAbout.add_credit_section(
+                    resource_type, (resource_url,))
         icon_logo = Pixbuf.new_from_file(FILE_ICON)
         self.ui.dialogAbout.set_logo(icon_logo)
         self.ui.dialogAbout.set_transient_for(winParent)
