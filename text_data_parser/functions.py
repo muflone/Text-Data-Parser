@@ -25,6 +25,25 @@ from gi.repository import Gtk
 from .constants import *
 
 
+def show_dialog_fileopen(parent, title):
+    """Show a FileChooserDialog with open and cancel buttons"""
+    dialog = Gtk.FileChooserDialog(parent=parent,
+                                   flags=Gtk.DialogFlags.MODAL,
+                                   type=Gtk.WindowType.TOPLEVEL,
+                                   buttons=(Gtk.STOCK_CANCEL,
+                                            Gtk.ResponseType.CANCEL,
+                                            Gtk.STOCK_OPEN,
+                                            Gtk.ResponseType.OK))
+    if title:
+        dialog.set_title(title)
+    if dialog.run() == Gtk.ResponseType.OK:
+        result = dialog.get_filename()
+    else:
+        result = None
+    dialog.destroy()
+    return result
+
+
 def readlines(filename, empty_lines=False):
     """Read all the lines of a filename, optionally skipping empty lines"""
     result = []
@@ -50,6 +69,7 @@ def gtk30_(message, context=None):
 
 
 __all__ = [
+    'show_dialog_fileopen',
     'readlines',
     'process_events',
     '_',
