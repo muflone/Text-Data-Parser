@@ -18,6 +18,7 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 
+import sys
 import os.path
 from xdg import BaseDirectory
 
@@ -34,8 +35,8 @@ APP_COPYRIGHT = 'Copyright 2015 %s' % APP_AUTHOR
 DOMAIN_NAME = 'textdataparser'
 
 # Paths constants
-# If there's a file data/textdataparser.png then the shared data are searched in
-# relative paths, else the standard paths are used
+# If there's a file data/textdataparser.png then the shared data are searched
+# in relative paths, else the standard paths are used
 if os.path.isfile(os.path.join('data', 'textdataparser.png')):
     DIR_PREFIX = '.'
     DIR_LOCALE = os.path.join(DIR_PREFIX, 'locale')
