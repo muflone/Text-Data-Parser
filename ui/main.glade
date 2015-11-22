@@ -93,7 +93,17 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkTextBuffer" id="textbuffer"/>
+  <object class="GtkTextTagTable" id="tags">
+    <child type="tag">
+      <object class="GtkTextTag" id="tag_highlight_line">
+        <property name="background">Lemon Chiffon</property>
+        <property name="font">Normal</property>
+      </object>
+    </child>
+  </object>
+  <object class="GtkTextBuffer" id="textbuffer">
+    <property name="tag_table">tags</property>
+  </object>
   <object class="GtkWindow" id="win_main">
     <property name="width_request">400</property>
     <property name="height_request">300</property>

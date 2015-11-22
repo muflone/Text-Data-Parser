@@ -134,6 +134,15 @@ class UIMain(object):
                     treeiter=self.map_iters[field.name],
                     field=field,
                     raw_value=value[field.name])
+            # Highlight the text line for the selected record
+            iter_start = self.ui.textbuffer.get_iter_at_line(self.current_row)
+            iter_end = self.ui.textbuffer.get_iter_at_line(self.current_row + 1)
+            self.ui.textbuffer.remove_tag(self.ui.tag_highlight_line,
+                                          self.ui.textbuffer.get_start_iter(),
+                                          self.ui.textbuffer.get_end_iter())
+            self.ui.textbuffer.apply_tag(self.ui.tag_highlight_line,
+                                         iter_start, iter_end)
+
         self.ui.action_data_previous.set_sensitive(self.current_row > 0)
         self.ui.action_data_next.set_sensitive(
             self.current_row < len(self.parser) - 1)
