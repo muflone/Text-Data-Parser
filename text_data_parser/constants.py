@@ -34,12 +34,19 @@ APP_COPYRIGHT = 'Copyright 2015 %s' % APP_AUTHOR
 DOMAIN_NAME = 'textdataparser'
 
 # Paths constants
-DIR_PREFIX = '.'
-DIR_LOCALE = os.path.join(DIR_PREFIX, 'locale')
+# If there's a file data/textdataparser.png then the shared data are searched in
+# relative paths, else the standard paths are used
+if os.path.isfile(os.path.join('data', 'textdataparser.png')):
+    DIR_PREFIX = '.'
+    DIR_LOCALE = os.path.join(DIR_PREFIX, 'locale')
+    DIR_DOCS = os.path.join(DIR_PREFIX, 'doc')
+else:
+    DIR_PREFIX = os.path.join(sys.prefix, 'share', 'textdataparser')
+    DIR_LOCALE = os.path.join(sys.prefix, 'share', 'locale')
+    DIR_DOCS = os.path.join(sys.prefix, 'share', 'doc', 'textdataparser')
 # Set the paths for the folders
 DIR_DATA = os.path.join(DIR_PREFIX, 'data')
 DIR_UI = os.path.join(DIR_PREFIX, 'ui')
-DIR_DOCS = os.path.join(DIR_PREFIX, 'doc')
 DIR_SETTINGS = BaseDirectory.save_config_path(DOMAIN_NAME)
 # Set the paths for the UI files
 FILE_UI_MAIN = os.path.join(DIR_UI, 'main.glade')
