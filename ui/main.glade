@@ -35,6 +35,7 @@
         <property name="icon_name">document-open</property>
         <property name="is_important">True</property>
         <property name="sensitive">False</property>
+        <signal name="activate" handler="on_action_data_open_activate" swapped="no"/>
       </object>
       <accelerator key="o" modifiers="GDK_CONTROL_MASK"/>
     </child>
@@ -52,6 +53,7 @@
         <property name="label" translatable="yes">Next record</property>
         <property name="short_label" translatable="yes">Next record</property>
         <property name="icon_name">go-next</property>
+        <property name="sensitive">False</property>
         <signal name="activate" handler="on_action_data_next_activate" swapped="no"/>
       </object>
       <accelerator key="Page_Down"/>
@@ -61,6 +63,7 @@
         <property name="label" translatable="yes">Previous record</property>
         <property name="short_label" translatable="yes">Previous record</property>
         <property name="icon_name">go-previous</property>
+        <property name="sensitive">False</property>
         <signal name="activate" handler="on_action_data_previous_activate" swapped="no"/>
       </object>
       <accelerator key="Page_Up"/>

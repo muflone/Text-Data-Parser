@@ -99,6 +99,16 @@ class UIMain(object):
             self.load_definitions(selected_filename)
             self.ui.action_data_open.set_sensitive(True)
 
+    def on_action_data_open_activate(self, action):
+        """Select and load a data file"""
+        selected_filename = show_dialog_fileopen(
+            parent=self.ui.win_main,
+            title=_("Select a data file to load"))
+        if selected_filename:
+            self.load_data(selected_filename)
+            self.ui.action_data_previous.set_sensitive(True)
+            self.ui.action_data_next.set_sensitive(True)
+        
     def on_action_data_next_activate(self, action):
         """Move to the next record"""
         if self.current_row < len(self.parser) - 1:
