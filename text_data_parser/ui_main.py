@@ -53,6 +53,7 @@ class UIMain(object):
         for field in self.fields:
             # Map each iter to a field name
             self.map_iters[field.name] = self.model.add_data(field, None)
+        self.ui.action_data_open.set_sensitive(True)
 
     def load_data(self, data_file):
         """Load the data file using the parser"""
@@ -62,6 +63,8 @@ class UIMain(object):
                 for line in text_file:
                     self.ui.textbuffer.insert_at_cursor(line, len(line))
                 text_file.close()
+            self.ui.action_data_previous.set_sensitive(True)
+            self.ui.action_data_next.set_sensitive(True)
 
     def loadUI(self):
         """Load the interface UI"""
@@ -97,7 +100,6 @@ class UIMain(object):
             title=_("Select a definitions file to load"))
         if selected_filename:
             self.load_definitions(selected_filename)
-            self.ui.action_data_open.set_sensitive(True)
 
     def on_action_data_open_activate(self, action):
         """Select and load a data file"""
@@ -106,8 +108,6 @@ class UIMain(object):
             title=_("Select a data file to load"))
         if selected_filename:
             self.load_data(selected_filename)
-            self.ui.action_data_previous.set_sensitive(True)
-            self.ui.action_data_next.set_sensitive(True)
         
     def on_action_data_next_activate(self, action):
         """Move to the next record"""
