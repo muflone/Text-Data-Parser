@@ -75,6 +75,7 @@ class UIMain(object):
         self.ui.textbuffer.connect("notify::cursor-position",
                                    self.on_textbuffer_cursor_position_changed)
         self._template_position = self.ui.label_position.get_text()
+        self._template_recordnr = self.ui.label_recordnr.get_text()
         # Update the cursor position
         self.on_textbuffer_cursor_position_changed(None, None)
         # Set the actions accelerator group
@@ -132,6 +133,8 @@ class UIMain(object):
                 raw_value=value[field.name])
         self.ui.action_data_previous.set_sensitive(self.current_row > 0)
         self.ui.action_data_next.set_sensitive(self.current_row < len(self.parser) - 1)
+        self.ui.label_recordnr.set_text(self._template_recordnr % {
+            'record': self.current_row + 1})
 
     def on_action_application_about_activate(self, action):
         """Show the about dialog"""
