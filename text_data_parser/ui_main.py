@@ -64,8 +64,8 @@ class UIMain(object):
                 for line in text_file:
                     self.ui.textbuffer.insert_at_cursor(line, len(line))
                 text_file.close()
-            self.ui.action_data_previous.set_sensitive(True)
-            self.ui.action_data_next.set_sensitive(True)
+            self.current_row = 0
+            self.show_current_record()
 
     def loadUI(self):
         """Load the interface UI"""
@@ -130,6 +130,8 @@ class UIMain(object):
                 treeiter=self.map_iters[field.name],
                 field=field,
                 raw_value=value[field.name])
+        self.ui.action_data_previous.set_sensitive(self.current_row > 0)
+        self.ui.action_data_next.set_sensitive(self.current_row < len(self.parser) - 1)
 
     def on_action_application_about_activate(self, action):
         """Show the about dialog"""
