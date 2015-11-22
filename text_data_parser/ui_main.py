@@ -59,6 +59,7 @@ class UIMain(object):
         """Load the data file using the parser"""
         self.parser.load_from_file(self.fields, data_file)
         if self.parser.data_file:
+            self.ui.textbuffer.set_text('')
             with open(self.parser.data_file, 'r') as text_file:
                 for line in text_file:
                     self.ui.textbuffer.insert_at_cursor(line, len(line))
