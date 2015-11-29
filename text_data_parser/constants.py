@@ -24,7 +24,7 @@ from xdg import BaseDirectory
 
 # Application constants
 APP_NAME = 'Text Data Parser'
-APP_VERSION = '0.1.0'
+APP_VERSION = '0.2.0'
 APP_DESCRIPTION = 'View text data files with definitions'
 APP_ID = 'textdataparser.muflone.com'
 APP_URL = 'http://www.muflone.com/textdataparser/'
