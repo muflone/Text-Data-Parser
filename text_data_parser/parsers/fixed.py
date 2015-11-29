@@ -37,4 +37,4 @@ class DataParserFixed(DataParserAbstract):
                 for field in fields:
                     values[field.name] = s_line[field.start - 1:field.end]
                 self.values.append(values)
-        f.close()
+            f.close()
