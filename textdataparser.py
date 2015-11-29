@@ -29,7 +29,6 @@ if __name__ == '__main__':
     arg_data_file = None
     # Load the settings from the configuration file
     settings = Settings()
-    settings.load()
     # Start the application
     app = Application(
         settings=settings,

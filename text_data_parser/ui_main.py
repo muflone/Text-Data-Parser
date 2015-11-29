@@ -21,7 +21,7 @@
 from .defined_fields import DefinedFields
 from .constants import FILE_UI_MAIN
 from .functions import show_dialog_fileopen, _
-from .settings import SECTION_APPLICATION
+from .settings import *
 from .model_data import ModelData
 from .gtkbuilder_loader import GtkBuilderLoader
 from .ui_about import UIAbout
@@ -42,21 +42,20 @@ class UIMain(object):
         self.about = UIAbout(self.ui.win_main, settings, False)
         # Restore the options from settings
         self.ui.action_settings_line_numbers.set_active(
-            self.settings.get_boolean(
-                SECTION_APPLICATION,
-                'show line numbers',
+            self.settings.get_setting(
+                SETTING_SHOW_LINE_NUMBERS,
                 self.ui.action_settings_line_numbers.get_active()))
         # Restore the saved size and position
-        if self.settings.get_value('width', 0) and \
-                self.settings.get_value('height', 0):
+        if self.settings.get_setting(SETTING_MAIN_WINDOW_WIDTH) and \
+                self.settings.get_setting(SETTING_MAIN_WINDOW_HEIGHT):
             self.ui.win_main.set_default_size(
-                self.settings.get_value('width', -1),
-                self.settings.get_value('height', -1))
-        if self.settings.get_value('left', 0) and \
-                self.settings.get_value('top', 0):
+                self.settings.get_setting(SETTING_MAIN_WINDOW_WIDTH, -1),
+                self.settings.get_setting(SETTING_MAIN_WINDOW_HEIGHT, -1))
+        if self.settings.get_setting(SETTING_MAIN_WINDOW_LEFT) and \
+                self.settings.get_setting(SETTING_MAIN_WINDOW_TOP):
             self.ui.win_main.move(
-                self.settings.get_value('left', 0),
-                self.settings.get_value('top', 0))
+                self.settings.get_setting(SETTING_MAIN_WINDOW_LEFT),
+                self.settings.get_setting(SETTING_MAIN_WINDOW_TOP))
         # Map each iter to a field name
         self.map_iters = {}
         # Load the definition file if provided
@@ -124,11 +123,19 @@ class UIMain(object):
 
     def on_winMain_delete_event(self, widget, event):
         """Save the settings and close the application"""
-        self.settings.set_sizes(self.ui.win_main)
-        self.settings.set_boolean(
-            SECTION_APPLICATION,
-            'show line numbers',
+        # Window position
+        position = self.ui.win_main.get_position()
+        self.settings.set_setting(SETTING_MAIN_WINDOW_LEFT, position[0])
+        self.settings.set_setting(SETTING_MAIN_WINDOW_TOP, position[1])
+        # Window size
+        size = self.ui.win_main.get_size()
+        self.settings.set_setting(SETTING_MAIN_WINDOW_WIDTH, size[0])
+        self.settings.set_setting(SETTING_MAIN_WINDOW_HEIGHT, size[1])
+        # Preferences
+        self.settings.set_setting(
+            SETTING_SHOW_LINE_NUMBERS,
             self.ui.action_settings_line_numbers.get_active())
+        # Save settings and quit
         self.settings.save()
         self.about.destroy()
         self.ui.win_main.destroy()

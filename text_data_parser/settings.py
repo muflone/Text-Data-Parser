@@ -30,12 +30,15 @@ from .constants import *
 SECTION_MAINWIN = 'main window'
 SECTION_APPLICATION = 'application'
 
+SETTING_MAIN_WINDOW_LEFT = (SECTION_MAINWIN, 'left', int)
+SETTING_MAIN_WINDOW_TOP = (SECTION_MAINWIN, 'top', int)
+SETTING_MAIN_WINDOW_WIDTH = (SECTION_MAINWIN, 'width', int)
+SETTING_MAIN_WINDOW_HEIGHT = (SECTION_MAINWIN, 'height', int)
+SETTING_MAIN_WINDOW_SPLITTER = (SECTION_MAINWIN, 'splitter position', int)
+SETTING_SHOW_LINE_NUMBERS = (SECTION_APPLICATION, 'show line numbers', bool)
 
 class Settings(object):
     def __init__(self):
-        self.settings = {}
-        self.model = None
-
         # Command line options and arguments
         parser = optparse.OptionParser(usage='usage: %prog [options]')
         parser.set_defaults(verbose_level=VERBOSE_LEVEL_NORMAL)
@@ -55,59 +58,60 @@ class Settings(object):
                          VERBOSE_LEVEL_MAX)
             self.config.read(self.filename)
 
-    def load(self):
-        """Load window settings"""
-        if self.config.has_section(SECTION_MAINWIN):
-            self.logText('Retrieving window settings', VERBOSE_LEVEL_MAX)
-            # Retrieve window position and size
-            if self.config.has_option(SECTION_MAINWIN, 'left'):
-                self.settings['left'] = self.config.getint(SECTION_MAINWIN,
-                                                           'left')
-            if self.config.has_option(SECTION_MAINWIN, 'top'):
-                self.settings['top'] = self.config.getint(SECTION_MAINWIN,
-                                                          'top')
-            if self.config.has_option(SECTION_MAINWIN, 'width'):
-                self.settings['width'] = self.config.getint(SECTION_MAINWIN,
-                                                            'width')
-            if self.config.has_option(SECTION_MAINWIN, 'height'):
-                self.settings['height'] = self.config.getint(SECTION_MAINWIN,
-                                                             'height')
-
-    def get_value(self, name, default=None):
-        return self.settings.get(name, default)
-
-    def set_sizes(self, winParent):
-        """Save configuration for main window"""
-        # Main window settings section
-        self.logText('Saving window settings', VERBOSE_LEVEL_MAX)
-        if not self.config.has_section(SECTION_MAINWIN):
-            self.config.add_section(SECTION_MAINWIN)
-        # Window position
-        position = winParent.get_position()
-        self.config.set(SECTION_MAINWIN, 'left', position[0])
-        self.config.set(SECTION_MAINWIN, 'top', position[1])
-        # Window size
-        size = winParent.get_size()
-        self.config.set(SECTION_MAINWIN, 'width', size[0])
-        self.config.set(SECTION_MAINWIN, 'height', size[1])
-
-    def get_boolean(self, section, name, default=None):
-        """Get a boolean option from a specific section"""
-        if self.config.has_option(section, name):
-            return self.config.get(section, name) == '1'
+    def get(self, section, option, default=None):
+        """Get an option from a specific section"""
+        if self.config.has_section(section) and \
+                self.config.has_option(section, option):
+            return self.config.get(section, option)
         else:
             return default
 
-    def set_boolean(self, section, name, value):
-        """Save a boolean option in a specific section"""
+    def set(self, section, option, value):
+        """Save an option in a specific section"""
         if not self.config.has_section(section):
             self.config.add_section(section)
-        self.config.set(section, name, value and '1' or '0')
+        self.config.set(section, option, value)
+
+    def get_boolean(self, section, option, default=None):
+        """Get a boolean option from a specific section"""
+        return self.get(section, option, default) == '1'
+
+    def set_boolean(self, section, option, value):
+        """Save a boolean option in a specific section"""
+        self.set(section, option, '1' if value else '0')
+
+    def get_int(self, section, option, default=0):
+        """Get an integer option from a specific section"""
+        return int(self.get(section, option, default))
+
+    def set_int(self, section, option, value):
+        """Set an integer option from a specific section"""
+        self.set(section, option, int(value))
+
+    def get_setting(self, setting, default=None):
+        """Get the specified setting with a fallback value"""
+        section, option, option_type = setting
+        if option_type is int:
+            return self.get_int(section, option, default and default or 0)
+        elif option_type is bool:
+            return self.get_boolean(section, option, default if True else False)
+        else:
+            return self.get(section, option, default)
+
+    def set_setting(self, setting, value):
+        """Set the specified setting"""
+        section, option, option_type = setting
+        if option_type is int:
+            return self.set_int(section, option, value)
+        elif option_type is bool:
+            return self.set_boolean(section, option, value)
+        else:
+            return self.set(section, option, value)
 
     def save(self):
         """Save the whole configuration"""
-        file_settings = open(FILE_SETTINGS, mode='w')
-        self.logText('Saving settings to %s' % FILE_SETTINGS,
+        file_settings = open(self.filename, mode='w')
+        self.logText('Saving settings to %s' % self.filename,
                      VERBOSE_LEVEL_MAX)
         self.config.write(file_settings)
         file_settings.close()
