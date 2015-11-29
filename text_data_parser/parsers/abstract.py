@@ -18,6 +18,10 @@
 #  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 
+import chardet
+
+MAX_FILE_SIZE = 1 * 1024 * 1024
+
 
 class DataParserAbstract(object):
     def __init__(self):
@@ -26,6 +30,17 @@ class DataParserAbstract(object):
 
     def load_from_file(self, fields, file_source):
         self.data_file = file_source
+        with open(self.data_file, 'rb') as text_file:
+            buffer = text_file.read(MAX_FILE_SIZE)
+            # Guess the file encoding
+            try:
+                self.encoding = chardet.detect(buffer)['encoding']
+            except:
+                self.encoding = None
+            if not self.encoding:
+                print 'warning: unknown encoding, will fallback to utf-8'
+                self.encoding = 'utf-8'
+            text_file.close()
 
     def __iter__(self):
         """Iterate over the values"""

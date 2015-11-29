@@ -32,7 +32,7 @@ class DataParserFixed(DataParserAbstract):
                 # Strip invalid characters
                 s_line = s_line.replace('\r', '')
                 s_line = s_line.replace('\n', '')
-                s_line = unicode(s_line.decode('utf-8'))
+                s_line = unicode(s_line.decode(self.encoding))
                 values = {}
                 for field in fields:
                     values[field.name] = s_line[field.start - 1:field.end]

@@ -85,9 +85,10 @@ class UIMain(object):
             self.ui.textbuffer.set_text('')
             self.total_rows = 0
             with open(self.parser.data_file, 'r') as text_file:
-                for line in text_file:
+                for line in text_file.xreadlines():
                     self.total_rows += 1
-                    self.ui.textbuffer.insert_at_cursor(line, len(line))
+                    line = unicode(line.decode(self.parser.encoding))
+                    self.ui.textbuffer.insert_at_cursor(line, -1)
                 text_file.close()
             # Add line numbers on the left side using the tag line_nr
             for line in xrange(self.total_rows):

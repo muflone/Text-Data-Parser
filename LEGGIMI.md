@@ -19,6 +19,7 @@ Requisiti di sistema
 * Libreria GObject per Python 2.x
 * Libreria XDG per Python 2.x
 * Libreria Distutils per Python 2.x (generalmente fornita col pacchetto Python)
+* Modulo chardet per Python 2.x
 
 Installazione
 -------------

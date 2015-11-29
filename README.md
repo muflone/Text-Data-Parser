@@ -18,6 +18,7 @@ System Requirements
 * GObject libraries for Python 2.x
 * XDG library for Python 2.x
 * Distutils library for Python 2.x (usually shipped with Python distribution)
+* The chardet module for Python 2.x
 
 Installation
 ------------
