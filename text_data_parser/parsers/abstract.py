@@ -29,6 +29,8 @@ class DataParserAbstract(object):
         self.values = []
 
     def load_from_file(self, fields, file_source):
+        """Clear the previous data and reload from the source file"""
+        self.values = []
         self.data_file = file_source
         with open(self.data_file, 'rb') as text_file:
             buffer = text_file.read(MAX_FILE_SIZE)

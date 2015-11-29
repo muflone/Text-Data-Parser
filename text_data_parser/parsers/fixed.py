@@ -26,6 +26,7 @@ class DataParserFixed(DataParserAbstract):
         super(self.__class__, self).__init__()
 
     def load_from_file(self, fields, file_data):
+        """Clear the previous data and reload from the source file"""
         super(self.__class__, self).load_from_file(fields, file_data)
         with open(file_data, 'r') as f:
             for s_line in f:
