@@ -76,6 +76,8 @@ class ModelData(object):
                     value = int(raw_value)
                 elif field.type == 'S':
                     value = float(raw_value)
+                    if field.decimals > 0:
+                        value /= pow(10, field.decimals)
             except:
                 value = 'Invalid value'
         return value
