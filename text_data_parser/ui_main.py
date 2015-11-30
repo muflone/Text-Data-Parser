@@ -56,6 +56,12 @@ class UIMain(object):
             self.ui.win_main.move(
                 self.settings.get_setting(SETTING_MAIN_WINDOW_LEFT),
                 self.settings.get_setting(SETTING_MAIN_WINDOW_TOP))
+        # Restore the splitter position
+        if self.settings.get_setting(SETTING_MAIN_WINDOW_SPLITTER,
+                                   self.ui.paned_main.get_position()):
+            self.ui.paned_main.set_position(self.settings.get_setting(
+                SETTING_MAIN_WINDOW_SPLITTER,
+                self.ui.paned_main.get_position()))
         # Map each iter to a field name
         self.map_iters = {}
         # Load the definition file if provided
@@ -131,6 +137,9 @@ class UIMain(object):
         size = self.ui.win_main.get_size()
         self.settings.set_setting(SETTING_MAIN_WINDOW_WIDTH, size[0])
         self.settings.set_setting(SETTING_MAIN_WINDOW_HEIGHT, size[1])
+        # Splitter position
+        self.settings.set_setting(SETTING_MAIN_WINDOW_SPLITTER,
+                                  self.ui.paned_main.get_position())
         # Preferences
         self.settings.set_setting(
             SETTING_SHOW_LINE_NUMBERS,
