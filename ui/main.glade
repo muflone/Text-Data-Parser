@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.18.3 -->
 <interface>
-  <requires lib="gtk+" version="3.16"/>
+  <requires lib="gtk+" version="3.0"/>
   <object class="GtkAccelGroup" id="accelerators"/>
   <object class="GtkActionGroup" id="actions_application">
     <property name="accel_group">accelerators</property>
@@ -134,7 +134,7 @@
     <accel-groups>
       <group name="accelerators"/>
     </accel-groups>
-    <signal name="delete-event" handler="on_winMain_delete_event" swapped="no"/>
+    <signal name="delete-event" handler="on_win_main_delete_event" swapped="no"/>
     <child>
       <object class="GtkBox" id="box_content">
         <property name="visible">True</property>

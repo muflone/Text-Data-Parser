@@ -26,6 +26,7 @@ from .model_data import ModelData
 from .gtkbuilder_loader import GtkBuilderLoader
 from .ui_about import UIAbout
 from gi.repository import Gtk
+from gi.repository import Gdk
 
 LINE_NUMBER_MARGIN = 1
 
@@ -127,7 +128,7 @@ class UIMain(object):
         """Show the UI"""
         self.ui.win_main.show_all()
 
-    def on_winMain_delete_event(self, widget, event):
+    def on_win_main_delete_event(self, widget, event):
         """Save the settings and close the application"""
         # Window position
         position = self.ui.win_main.get_position()
@@ -147,7 +148,6 @@ class UIMain(object):
         # Save settings and quit
         self.settings.save()
         self.about.destroy()
-        self.ui.win_main.destroy()
         self.application.quit()
 
     def on_action_data_definitions_activate(self, action):
@@ -208,8 +208,10 @@ class UIMain(object):
         self.about.show()
 
     def on_action_application_quit_activate(self, action):
-        """Close the window"""
-        self.ui.win_main.destroy()
+        """Close the application by closing the main window"""
+        event = Gdk.Event()
+        event.key.type = Gdk.EventType.DELETE
+        self.ui.win_main.event(event)
 
     def on_textbuffer_cursor_position_changed(self, widget, property_name):
         """Update the cursor position"""
